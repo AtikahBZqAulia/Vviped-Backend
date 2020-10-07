@@ -75,19 +75,16 @@ def total_post():
 likes = set()
 print("Fetching likes of all posts of profile {}.".format(target.username))
 
-posts = []
-posts = target.get_posts()
-list_of_posts = [{
-    'Image_URL': post.url,
-    'Caption': post.caption,
-    'Likes': post.likes,
-    'Comments': [comment.text for comment in post.get_comments()],
-} for post in posts]
-
 
 @app.route("/get_posts", methods=['GET'])
 def post_detail():
-    return jsonify({'Post': str(list_of_posts)})
+    posts = target.get_posts()
+    return jsonify({{
+        'Image_URL': post.url,
+        'Caption': post.caption,
+        'Likes': post.likes,
+        'Comments': [comment.text for comment in post.get_comments()],
+    }for post in posts})
 
 
 if __name__ == '__main__':
