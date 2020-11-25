@@ -1,7 +1,7 @@
 # VVIPED - Group A
 [You are now in the page of **Backend Repo**]
 
-[Click here to see VVIPED- **FrontEnd Repo**]((https://github.com/AtikahBZqAulia/Vviped))
+[Click here to see our **FrontEnd Repo**](https://github.com/AtikahBZqAulia/Vviped)
 
 [Click here to see our **Product Backlogs**](https://www.notion.so/0cb3638b1c284c1eb3f79f7f59e96a30?v=8cd37891c4d14f6fa1b0f9ca61ecf47a)
 
