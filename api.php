@@ -50,6 +50,10 @@ if (isset($_GET['apicall'])) {
                 $message .= "selling_status, ";
                 $is_error = true;
             }
+            if (!isset($_POST['whatsapp'])) {
+                $message .= "whatsapp number, ";
+                $is_error = true;
+            }
 
 
             //in case we have an error in validation, displaying the error message 
@@ -64,8 +68,8 @@ if (isset($_GET['apicall'])) {
                 //saving the uploaded file to the uploads directory in our target file
                 if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
 
-                    $stmt = $conn->prepare("INSERT INTO selling_posts (`path`, `product_price`, `product_name`, `product_condition`, `product_desc`, `seller_loc`, `selling_status`) VALUES (?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param("sssssss", $target_file, $_POST['product_price'], $_POST['product_name'], $_POST['product_condition'], $_POST['product_desc'], $_POST['seller_loc'], $_POST['selling_status']);
+                    $stmt = $conn->prepare("INSERT INTO selling_posts (`path`, `product_price`, `product_name`, `product_condition`, `product_desc`, `seller_loc`, `selling_status`, `whatsapp`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->bind_param("ssssssss", $target_file, $_POST['product_price'], $_POST['product_name'], $_POST['product_condition'], $_POST['product_desc'], $_POST['seller_loc'], $_POST['selling_status'], $_POST['whatsapp']);
 
                     if ($stmt->execute()) {
                         $response['error'] = false;
@@ -77,6 +81,7 @@ if (isset($_GET['apicall'])) {
                         $response['product_desc'] = $_POST['product_desc'];
                         $response['seller_loc'] = $_POST['seller_loc'];
                         $response['selling_status'] = $_POST['selling_status'];
+                        $response['whatsapp'] = $_POST['whatsapp'];
                     } else {
                         $response['error'] = true;
                         $response['message'] = 'Could not upload image, try again...';
@@ -167,25 +172,27 @@ if (isset($_GET['apicall'])) {
             //$stmt = $conn->prepare("SELECT `id_product`, `path_product`, `product_price`, `product_name`, `product_condition`, `product_desc`, `seller_loc`, `selling_status`, `user_id`, `username`, `fullname`, `email` FROM VIEW_SELLINGPRODUCT");
             //$stmt->execute();
             //$stmt->bind_result($id, $path, $product_price, $product_name, $product_condition, $product_desc, $seller_loc, $selling_status, $user_id, $username, $fullname, $email);
-            $stmt = "SELECT * FROM VIEW_SELLINGPRODUCT";
+            $stmt = "SELECT * FROM VIEW_SELLINGPOSTS";
             $read = mysqli_query($conn, $stmt);
             $row = mysqli_fetch_array($read);
 
             while ($row = mysqli_fetch_array($read)) {
 
                 $image = array();
-                $image['id'] = $row["id_product"];
-                $image['path'] = getBaseURL() . $row["path_product"];
+                $image['id'] = $row["id"];
+                $image['path'] = getBaseURL() . $row["path"];
                 $image['product_price'] = $row["product_price"];
                 $image['product_name'] = $row["product_name"];
                 $image['product_condition'] = $row["product_condition"];
                 $image['product_desc'] = $row["product_desc"];
                 $image['seller_loc'] = $row["seller_loc"];
                 $image['selling_status'] = $row["selling_status"];
+                $image['whatsapp'] = $row["whatsapp"];
                 $image['user_id'] = $row["user_id"];
-                $image['username'] = $row["username"];
-                $image['fullname'] = $row["fullname"];
                 $image['email'] = $row["email"];
+                $image['fullname'] = $row["fullname"];
+                $image['username'] = $row["username"];
+                $image['user_profpic'] = $row["user_profpict"];
 
                 array_push($response, $image);
             }
@@ -203,7 +210,6 @@ if (isset($_GET['apicall'])) {
             //$image['username'] = $username;
             //$image['fullname'] = $fullname;
             //$image['email'] = $email;
-
 
             break;
 
@@ -233,7 +239,6 @@ if (isset($_GET['apicall'])) {
                 $image['email'] = $row["email"];
                 array_push($response, $image);
             }
-
 
             //while ($stmt->fetch()) {
             //$image = array();
@@ -376,7 +381,7 @@ if (isset($_GET['apicall'])) {
                                 'email' => $email,
                                 'fullname' => $fullname,
                                 'username' => $username,
-                                'user_profpic' => $user_profpic,
+                                'user_profpic' => getBaseURL() . $user_profpic,
 
                                 // $user['hashpassword'] = $password;
                             ];
@@ -464,7 +469,6 @@ function getBaseURL()
     $url .= $_SERVER['REQUEST_URI'];
     return dirname($url) . '/';
 }
-
 
 header('Content-Type: application/json');
 echo json_encode($response);
