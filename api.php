@@ -55,7 +55,11 @@ if (isset($_GET['apicall'])) {
                 $is_error = true;
             }
             if (!isset($_POST['user_id'])) {
-                $message .= "whatsapp number, ";
+                $message .= "user_id, ";
+                $is_error = true;
+            }
+            if (!isset($_POST['campaign_id'])) {
+                $message .= "campaign_id, ";
                 $is_error = true;
             }
 
@@ -72,8 +76,8 @@ if (isset($_GET['apicall'])) {
                 //saving the uploaded file to the uploads directory in our target file
                 if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
 
-                    $stmt = $conn->prepare("INSERT INTO selling_posts (`path`, `product_price`, `product_name`, `product_condition`, `product_desc`, `seller_loc`, `selling_status`, `whatsapp`, `user_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param("sssssssss", $target_file, $_POST['product_price'], $_POST['product_name'], $_POST['product_condition'], $_POST['product_desc'], $_POST['seller_loc'], $_POST['selling_status'], $_POST['whatsapp'], $_POST['user_id']);
+                    $stmt = $conn->prepare("INSERT INTO selling_posts (`path`, `product_price`, `product_name`, `product_condition`, `product_desc`, `seller_loc`, `selling_status`, `whatsapp`, `user_id`, `campaign_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->bind_param("ssssssssss", $target_file, $_POST['product_price'], $_POST['product_name'], $_POST['product_condition'], $_POST['product_desc'], $_POST['seller_loc'], $_POST['selling_status'], $_POST['whatsapp'], $_POST['user_id'], $_POST['campaign_id']);
 
                     if ($stmt->execute()) {
                         $response['error'] = false;
@@ -87,6 +91,7 @@ if (isset($_GET['apicall'])) {
                         $response['selling_status'] = $_POST['selling_status'];
                         $response['whatsapp'] = $_POST['whatsapp'];
                         $response['user_id'] = $_POST['user_id'];
+                        $response['campaign_id'] = $_POST['campaign_id'];
                     } else {
                         $response['error'] = true;
                         $response['message'] = 'Could not upload image, try again...';
@@ -198,6 +203,9 @@ if (isset($_GET['apicall'])) {
                 $image['fullname'] = $row["fullname"];
                 $image['username'] = $row["username"];
                 $image['user_profpict'] = getBaseURL() . $row["user_profpic"];
+                $image['campaign_id'] = $row["campaign_id"];
+                $image['campaign_title'] = $row["campaign_title"];
+
 
                 array_push($response, $image);
             }
@@ -243,6 +251,7 @@ if (isset($_GET['apicall'])) {
                 $image['username'] = $row["username"];
                 $image['fullname'] = $row["fullname"];
                 $image['email'] = $row["email"];
+                $image['user_profpic'] = getBaseURL() . $row["user_profpic"];
                 array_push($response, $image);
             }
 
