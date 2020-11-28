@@ -139,6 +139,10 @@ if (isset($_GET['apicall'])) {
                 $message .= "phone_number, ";
                 $is_error = true;
             }
+            if (!isset($_POST['user_id'])) {
+                $message .= "user_id, ";
+                $is_error = true;
+            }
 
 
 
@@ -154,8 +158,8 @@ if (isset($_GET['apicall'])) {
                 //saving the uploaded file to the uploads directory in our target file
                 if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
 
-                    $stmt = $conn->prepare("INSERT INTO campaign_list (`path`, `campaign_category`, `campaign_title`, `campaign_desc`, `campaign_receiver`, `usage_details`, `phone_campaign`) VALUES (?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param("sssssss", $target_file, $_POST['campaign_category'], $_POST['campaign_title'], $_POST['campaign_desc'], $_POST['donation_goes'], $_POST['usage_details'], $_POST['phone_number']);
+                    $stmt = $conn->prepare("INSERT INTO campaign_list (`path`, `campaign_category`, `campaign_title`, `campaign_desc`, `campaign_receiver`, `usage_details`, `phone_campaign`, `user_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->bind_param("ssssssss", $target_file, $_POST['campaign_category'], $_POST['campaign_title'], $_POST['campaign_desc'], $_POST['donation_goes'], $_POST['usage_details'], $_POST['phone_number'], $_POST['user_id']);
 
                     if ($stmt->execute()) {
                         $response['error'] = false;
@@ -167,6 +171,7 @@ if (isset($_GET['apicall'])) {
                         $response['donation_goes'] = $_POST['donation_goes'];
                         $response['usage_details'] = $_POST['usage_details'];
                         $response['phone_number'] = $_POST['phone_number'];
+                        $response['user_id'] = $_POST['user_id'];
                     } else {
                         $response['error'] = true;
                         $response['message'] = 'Could not upload image, try again...';
