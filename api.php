@@ -500,7 +500,25 @@ if (isset($_GET['apicall'])) {
                         
             }
             break;
-    
+            
+           case 'showLogging':
+
+            $stmt = "SELECT * FROM logging ORDER BY id DESC";
+            $read = mysqli_query($conn, $stmt);
+
+
+            while ($row = mysqli_fetch_array($read)) {
+                $show = array();
+                $show['id'] = $row["id"];
+                $show['user_id'] = $row["user_id"];
+                $show['username'] = $row["username"];
+                $show['activity'] = $row["activity"];
+                $show['datetime'] = $row["datetime"];
+                array_push($response, $show);
+            }
+
+            break;
+
 
         case 'login':
             //error message and error flag
