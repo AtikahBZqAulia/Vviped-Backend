@@ -186,10 +186,10 @@ if (isset($_GET['apicall'])) {
         case 'sellingproducts':
             //$stmt = $conn->prepare("SELECT `id_product`, `path_product`, `product_price`, `product_name`, `product_condition`, `product_desc`, `seller_loc`, `selling_status`, `user_id`, `username`, `fullname`, `email` FROM VIEW_SELLINGPRODUCT");
             //$stmt->execute();
-            //$stmt->bind_result($id, $path, $product_price, $product_name, $product_condition, $product_desc, $seller_loc, $selling_status, $user_id, $username, $fullname, $email);
-            $stmt = "SELECT * FROM VIEW_SELLINGPOSTS";
+            //$stmt->bind_result($id, $path, $product_price, $product_name, $product_condition, $product_desc, $seller_loc, $selling_status, $user_id, $username, $fullname, $email);z
+            $stmt = "SELECT * FROM VIEW_SELLINGPOSTS ORDER BY id DESC";
             $read = mysqli_query($conn, $stmt);
-            $row = mysqli_fetch_array($read);
+            //$row = mysqli_fetch_array($read);
 
             while ($row = mysqli_fetch_array($read)) {
 
@@ -237,9 +237,9 @@ if (isset($_GET['apicall'])) {
             //$stmt->execute();
             //$stmt->bind_result($id, $path, $campaign_category, $campaign_title, $campaign_desc, $donation_goes, $usage_details, $phone_number);
 
-            $stmt = "SELECT * FROM VIEW_CAMPAIGNLIST";
+            $stmt = "SELECT * FROM VIEW_CAMPAIGNLIST ORDER BY id DESC";
             $read = mysqli_query($conn, $stmt);
-            $row = mysqli_fetch_array($read);
+            //$row = mysqli_fetch_array($read);
 
 
             while ($row = mysqli_fetch_array($read)) {
@@ -326,11 +326,13 @@ if (isset($_GET['apicall'])) {
                 // $stmt->bind_param("ssss", $_POST['email'], $_POST['fullname'], $_POST['username'], $password, );
 
                 $stmt->bind_param("sssss", $_POST['email'], $_POST['fullname'], $_POST['username'], $password_hashed, $_POST['user_profpic']);
-
+                
+                $id = $stmt->insert_id;
 
                 if ($stmt->execute()) {
                     $response['error'] = false;
                     $response['message'] = 'Register Success!';
+                    $response['id'] = $stmt->insert_id;
                     $response['user_profpic'] = $image['user_profpic'];
                     $response['email'] = $_POST['email'];
                     $response['fullname'] = $_POST['fullname'];
@@ -360,6 +362,145 @@ if (isset($_GET['apicall'])) {
                 }
             }
             break;
+            
+        case 'sellingpost_profile':
+            //error message and error flag
+
+            $user_id = $_POST['user_id'];
+
+            //validating the request to check if all the required parameters are available or not 
+            if (!isset($_POST['user_id'])) {
+                $message .= "user_id, ";
+                $is_error = true;
+            }
+            //in case we have an error in validation, displaying the error message 
+            if ($is_error) {
+                $response['error'] = true;
+                $response['message'] = $message . " required.";
+            } else {
+                //if validation succeeds 
+                $stmt = "SELECT * FROM VIEW_SELLINGPOSTS WHERE user_id = $user_id ORDER BY id DESC";
+                $read = mysqli_query($conn, $stmt);
+                //$row = mysqli_fetch_array($read);
+
+                while ($row = mysqli_fetch_array($read)) {
+
+                    $image = array();
+                    $image['id'] = $row["id"];
+                    $image['path'] = getBaseURL() . $row["path"];
+                    $image['product_price'] = $row["product_price"];
+                    $image['product_name'] = $row["product_name"];
+                    $image['product_condition'] = $row["product_condition"];
+                    $image['product_desc'] = $row["product_desc"];
+                    $image['seller_loc'] = $row["seller_loc"];
+                    $image['selling_status'] = $row["selling_status"];
+                    $image['whatsapp'] = $row["whatsapp"];
+                    $image['user_id'] = $row["user_id"];
+                    $image['email'] = $row["email"];
+                    $image['fullname'] = $row["fullname"];
+                    $image['username'] = $row["username"];
+                    $image['user_profpict'] = getBaseURL() . $row["user_profpic"];
+                    $image['campaign_id'] = $row["campaign_id"];
+                    $image['campaign_title'] = $row["campaign_title"];
+
+
+                    array_push($response, $image);
+                }
+            }
+            break;
+            
+            
+            case 'edituser':
+            //error message and error flag
+            
+            $target_folder = "profpic/";
+            $profpic = $_FILES['image']['name'];
+
+            $user_id = $_POST['user_id'];
+            $fullname = $_POST['fullname'];
+            $username = $_POST['username'];
+
+            //validating the request to check if all the required parameters are available or not 
+            if (!isset($_POST['user_id'])) {
+                $message .= "user_id, ";
+                $is_error = true;
+            }
+
+            //in case we have an error in validation, displaying the error message 
+            if ($is_error) {
+                $response['error'] = true;
+                $response['message'] = $message . " required.";
+            } else {
+                if($_FILES['image']['name'] == null) {
+                    $stmt = "UPDATE user SET fullname = COALESCE('$fullname', fullname), username = COALESCE('$username', username)  WHERE id=$user_id";
+                    mysqli_query($conn, $stmt);
+                    $profpic = "SELECT * FROM user WHERE id=$user_id";
+                    $read_user = mysqli_query($conn, $profpic);
+                    $row = mysqli_fetch_array($read_user);
+                    $response['message'] = 'Profile Updated!';
+                    $response['fullname'] = $row['fullname'];
+                    $response['username'] = $row['username'];
+                    $response['profpic'] = getBaseURL() . $row['user_profpic'];
+                    
+                }
+                elseif($_FILES['image']['name'] != null) {
+                    $target_file = $target_dir . uniqid() . '.' . pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+
+                //saving the uploaded file to the uploads directory in our target file
+                    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                        $stmt = "UPDATE user SET fullname = COALESCE('$fullname', fullname), username = COALESCE('$username', username), user_profpic = COALESCE('$target_file', user_profpic)  WHERE id=$user_id";
+                        mysqli_query($conn, $stmt);
+                        $profpic = "SELECT * FROM user WHERE id=$user_id";
+                        $read_user = mysqli_query($conn, $profpic);
+                        $row = mysqli_fetch_array($read_user);
+                        $response['message'] = 'Profile Updated!';
+                        $response['fullname'] = $row['fullname'];
+                        $response['username'] = $row['username'];
+                        $response['profpic'] = getBaseURL() . $row['user_profpic'];
+                        //$row = mysqli_fetch_array($read);
+                    
+                    }
+                }
+
+                
+            }
+            break;
+            
+            case 'useractivities':
+            //error message and error flag
+            $user_id = $_POST['user_id'];
+            $username = trim($_POST['username'],'"');;
+            $activity = $_POST['activity'];
+            $datetime = date('Y-m-d H:i:s');
+
+            //validating the request to check if all the required parameters are available or not 
+
+
+            //in case we have an error in validation, displaying the error message 
+            if ($is_error) {
+                $response['error'] = true;
+                $response['message'] = $message . " required.";
+            } else {
+                $stmt = $conn->prepare("INSERT INTO logging (`user_id`, `username`, `activity`, `datetime`) VALUES (?, ?, ?, ?)");
+                $stmt->bind_param("ssss", $user_id, $username, $activity, $datetime);
+                
+                if ($stmt->execute()) {
+                    $response['error'] = false;
+                    $response['message'] = 'Success';
+                    $response['user_id'] = $user_id;
+                    $response['username'] = $username;
+                    $response['activity'] = $activity;
+                    $response['datetime'] = $datetime;
+                    } 
+                    else {
+                        $response['error'] = true;
+                        $response['message'] = 'Please try again';
+                        
+                    }
+                        
+            }
+            break;
+    
 
         case 'login':
             //error message and error flag
