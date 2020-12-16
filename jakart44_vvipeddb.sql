@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 25, 2020 at 08:36 PM
+-- Generation Time: Dec 16, 2020 at 11:24 PM
 -- Server version: 10.3.25-MariaDB-log-cll-lve
 -- PHP Version: 7.3.6
 
@@ -45,14 +45,60 @@ CREATE TABLE `campaign_list` (
 --
 
 INSERT INTO `campaign_list` (`id`, `path`, `campaign_category`, `campaign_title`, `campaign_desc`, `campaign_receiver`, `usage_details`, `phone_campaign`, `user_id`) VALUES
-(1, 'uploads/5fa247880789d.JPG', 'pendidikan', 'Bantu Adik Misya untuk Sekolah', 'jfafh affhegfh', 'Adik Misya', 'Untuk membayar uang SPP, seragam, dan buku', '087584585249', 123),
-(4, 'uploads/5facab192fa87.jpeg', 'Bantuan Pendidikan', 'Bantu Anak Keluarga Pak Dono untuk Bersekolah', 'Pak Dono yang merupakan tulang punggung keluarga tertimpa musibah saat sedang bekerja yang mengakibatkan kehilangan kakinya. Pak Dono yang kini sudah tidak bisa bekerja membuat anak-anaknya putus sekolah karena tidak ada biaya', 'anak keluarga Pak Dono', 'membeli seragam, buku, dan keperluan sekolah lainnya', '08225556443', 9),
+(1, 'uploads/5fa247880789d.JPG', 'pendidikan', 'Bantu Adik Misya untuk Sekolah', 'Membantu adik misya yang putus sekolah karena tidak adanya biaya', 'Adik Misya', 'Untuk membayar uang SPP, seragam, dan buku', '087584585249', 2),
+(4, 'uploads/5facab192fa87.jpeg', 'Bantuan Pendidikan', 'Bantu Anak Keluarga Pak Dono untuk Bersekolah', 'Pak Dono yang merupakan tulang punggung keluarga tertimpa musibah saat sedang bekerja yang mengakibatkan kehilangan kakinya. Pak Dono yang kini sudah tidak bisa bekerja membuat anak-anaknya putus sekolah karena tidak ada biaya', 'anak keluarga Pak Dono', 'membeli seragam, buku, dan keperluan sekolah lainnya', '08225556443', 2),
 (3, 'uploads/5fa253ff96644.jpg', 'sosial', 'berbagi makanan', 'donasi akan disalurkan ke pedagang jalanan', 'pedagang keliling di lingkungan bintara', 'paket makanan, minuman, buah', '087883520021', 1),
 (5, 'uploads/5facabdb247d7.jpeg', 'Kegiatan Sosial', 'Berbagi Makanan', 'donasi akan dibagikan kepada para pemulung', 'para pemulung di lingkungan mustikajaya bekasi', 'membeli paket makanan, minuman, dan buah', '085542266842', 1),
-(6, 'uploads/5facac8c08911.jpeg', 'Kegiatan Sosial', 'berbagi makanan', 'berbagi sembako kepada orang-orang kurang mampu yang tinggal di lingkungan TPST Bantargebang', 'Orang-orang kurang mampu yang tinggal di lingkungan TPST Bantargebang', 'pembelian sembako', '085273173192', 123),
-(7, 'uploads/5facad87a4152.jpeg', 'Kegiatan Sosial', 'Berbagi sembako', 'Berbagi sembako kepada orang-orang yang kurang mampu yang tinggal di bantaran sungai Ciliwung', 'orang-orang yang kurang mampu yang tinggal di bantaran sungai Ciliwung', 'pembelian sembako', '082316464319', 9),
-(8, 'uploads/5fb2bbdeb7b89.png', 'test1', 'test2', 'test3', 'test4', 'test5', '087883520021', 1),
-(9, 'uploads/5fbd0c27858f3.JPG', 'pendidikan', 'Bantu Adik Misya untuk Sekolah', 'jfafh affhegfh', 'Adik Misya', 'Untuk membayar uang SPP, seragam, dan buku', '087584585249', 1);
+(6, 'uploads/5facac8c08911.jpeg', 'Kegiatan Sosial', 'berbagi makanan', 'berbagi sembako kepada orang-orang kurang mampu yang tinggal di lingkungan TPST Bantargebang', 'Orang-orang kurang mampu yang tinggal di lingkungan TPST Bantargebang', 'pembelian sembako', '085273173192', 2),
+(7, 'uploads/5facad87a4152.jpeg', 'Kegiatan Sosial', 'Berbagi sembako', 'Berbagi sembako kepada orang-orang yang kurang mampu yang tinggal di bantaran sungai Ciliwung', 'orang-orang yang kurang mampu yang tinggal di bantaran sungai Ciliwung', 'pembelian sembako', '082316464319', 2),
+(15, 'uploads/5fc93a1cec8a5.jpg', 'Pendidikan', 'Renovasi Rumah Belajar', 'Mari bantu anak-anak desa harapan untuk memiliki rumah belajar yang  nyaman di lingkungan mereka', 'Rumah Belajar Harapan Bangsa', 'Membeli semu keperluan untuk merenovasi rumah belajar', '085777885465', 16),
+(16, 'uploads/5fc9e07223063.jpg', 'bantu anak yatim', 'membantu anak yatim untuk membayar uang sekolah', 'karena dalam masa pandemi dan banyak anak yatim yang hanya tinggal bersama kerabatnya yang memiliki ekonomi yang pas-pasan. dan tidak berpenghasilan sama sekali', 'anak yatim kelurahan rawa terate', 'pembelian sembako dan membantu biaya sekolah', '085694760270', 17),
+(14, 'uploads/5fc8f4f2c215e.jpg', 'Lingkungan', 'Membantu kucing terlantar di jalanan', 'kasian kucing2 yg di jalanan butuh asupan yg cukup', 'kucing di jalanan di bintara bekasi barat', 'paket hemat berisi makanan kucing kering, basah, & air aqua gelas', '087886954900', 14),
+(17, 'uploads/5fc9e072b2681.jpg', 'bantu anak yatim', 'membantu anak yatim untuk membayar uang sekolah', 'karena dalam masa pandemi dan banyak anak yatim yang hanya tinggal bersama kerabatnya yang memiliki ekonomi yang pas-pasan. dan tidak berpenghasilan sama sekali', 'anak yatim kelurahan rawa terate', 'pembelian sembako dan membantu biaya sekolah', '085694760270', 17);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `logging`
+--
+
+CREATE TABLE `logging` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `username` varchar(128) NOT NULL,
+  `activity` varchar(256) NOT NULL,
+  `datetime` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `logging`
+--
+
+INSERT INTO `logging` (`id`, `user_id`, `username`, `activity`, `datetime`) VALUES
+(24, 1, 'octarinasls', 'Click add new campaign button', '2020-12-16 16:59:31'),
+(23, 1, 'octarinasls', 'Click Logout button', '2020-12-16 16:59:29'),
+(22, 1, 'octarinasls', 'Click Logout button', '2020-12-16 16:56:09'),
+(20, 1, 'octarinasls', 'Click Beli for product chocodot (chocolate dodol garut)', '2020-12-16 16:01:12'),
+(21, 1, 'octarinasls', 'Click add new campaign button', '2020-12-16 16:28:26'),
+(19, 1, 'octarinasls', 'Click Jual Produk Saya for campaign  membantu anak yatim untuk membayar uang sekolah', '2020-12-16 15:46:08'),
+(18, 1, 'octarinasls', 'Buy Product toner hada labo', '2020-12-16 14:42:12'),
+(17, 1, 'octarinasls', 'Buy Product chocodot (chocolate dodol garut)', '2020-12-16 14:42:06'),
+(25, 1, 'octarinasls', 'Click Logout button', '2020-12-16 17:02:12'),
+(26, 1, 'octarinasls', 'Logout from apps', '2020-12-16 17:02:17'),
+(27, 1, 'octarinasls', 'Click Jual Produk Saya for campaign  membantu anak yatim untuk membayar uang sekolah', '2020-12-16 21:07:31'),
+(28, 1, 'octarinasls', 'Upload new product for campaign membantu anak yatim untuk membayar uang sekolah', '2020-12-16 21:10:20'),
+(29, 1, 'octarinasls', 'Click add new campaign button', '2020-12-16 21:11:41'),
+(30, 1, 'octarinasls', 'Upload new campaign', '2020-12-16 21:12:31'),
+(31, 1, 'octarinasls', 'Click Ubah Profil button', '2020-12-16 21:38:21'),
+(32, 1, 'octarinasls', 'Click Ubah Profil button', '2020-12-16 21:40:31'),
+(33, 1, 'octarinasls', 'Saving profile update', '2020-12-16 21:40:42'),
+(34, 1, 'octarinasls', 'Click Beli for product chocodot (chocolate dodol garut)', '2020-12-16 21:47:15'),
+(35, 1, 'octarinasls', 'Chat seller for product chocodot (chocolate dodol garut)', '2020-12-16 21:47:17'),
+(36, 1, 'octarinasls', 'Click Logout button', '2020-12-16 21:53:15'),
+(37, 1, 'octarinasls', 'Logout from apps', '2020-12-16 21:53:15'),
+(38, 1, 'octarinasls', 'Login apps', '2020-12-16 21:53:28'),
+(39, 1, 'octarinasls', 'Click Logout button', '2020-12-16 22:31:13'),
+(40, 1, 'octarinasls', 'Logout from apps', '2020-12-16 22:31:14');
 
 -- --------------------------------------------------------
 
@@ -69,33 +115,30 @@ CREATE TABLE `selling_posts` (
   `product_desc` varchar(512) NOT NULL,
   `seller_loc` varchar(256) NOT NULL,
   `selling_status` varchar(10) NOT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `whatsapp` varchar(15) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `campaign_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `selling_posts`
 --
 
-INSERT INTO `selling_posts` (`id`, `path`, `product_price`, `product_name`, `product_condition`, `product_desc`, `seller_loc`, `selling_status`, `user_id`) VALUES
-(1, 'uploads/5f9d11505c612.jpeg', '15000', 'nasi box', 'New', 'murah dan yummy!', 'bekasi', 'SOLD', 1),
-(2, 'uploads/5f9d11e1339dd.JPG', '30000', 'No-bake cake', 'New', 'menggunakan bahan premium dan lezat', 'bekasi', 'SOLD', 1),
-(3, 'uploads/5f9e859b26b00.jpeg', '30000', 'Tanaman Hijau', 'New', 'Tanaman dalam kondisi bagus', 'Bekasi', 'SALE', 1),
-(4, 'uploads/5f9e85e576b8a.jpeg', '30000', 'Ayam Jago', 'New', 'Ayam sangat sehat dan gemuk', 'Bekasi, Jawa Barat', 'SALE', 1),
-(5, 'uploads/5f9e8ac95197e.jpg', '20000', 'mouse', 'Second', 'mouse mantab ada lampu nya punya nya si bagus ', 'bekasi', 'SALE', 1),
-(6, 'uploads/5f9e8adc04329.jpg', '20000', 'mouse', 'Second', 'mouse mantab ada lampu nya punya nya si bagus ', 'bekasi', 'SOLD', 1),
-(7, 'uploads/5f9e9e0e3c5bc.jpg', '50000', 'Buah', 'New', 'Buah', 'Bekasi', 'SALE', 1),
-(35, 'uploads/5fa26ee7ec2cf.jpeg', '15000', 'Micellar Water', 'Second', 'kondisi produk 90%', 'Bekasi, Jawa Barat', 'SALE', 1),
-(38, 'uploads/5fb2bef50cf1d.png', '250000', 'hape', 'Second', 'test4', 'test ', 'SALE', 1),
-(39, 'uploads/5fb2bf300968d.png', '250000', 'hape', 'Second', 'test4', 'test ', 'SALE', 1),
-(29, 'uploads/5f9ec52e4b3c2.jpg', '696969', 'ban dalam ', 'New', 'ban dalam buatan zimbabwe', 'zimbabwe', 'SALE', 1),
-(30, 'uploads/5f9ec5335f55c.jpg', '696969', 'ban dalam ', 'New', 'ban dalam buatan zimbabwe', 'zimbabwe', 'SOLD', 1),
-(31, 'uploads/5fa11d35a429b.jpg', '110000', 'Helm ', 'New', 'Kondisi baru, size L', 'Jl. Raya Bintara 6 Bekasi barat', 'SALE', 1),
-(33, 'uploads/5fa17b064394b.jpeg', '70000', 'Pampers MamyPoko', 'New', 'Masih baru', 'Bekasi', 'SALE', 1),
-(34, 'uploads/5fa2312c50c98.jpeg', '15000', 'Garnier Micellar Water', 'Second', 'isi produk masih banyak, kondisi sekitar 80%', 'Kecamatan Mustika Jaya, Bekasi, Jawa Barat', 'SOLD', 1),
-(36, 'uploads/5fae12b1e1a9f.jpeg', '30000', 'Bebek', 'New', 'kondisi bebek sehat 100%', 'Bekasi', 'SALE', 1),
-(37, 'uploads/5fae9031510a2.jpeg', '20000', 'Dompet', 'Second', 'kondisi dompet masih 80%', 'Bekasi', 'SOLD', 1),
-(40, 'uploads/5fbd0dff1d1ce.JPG', '20000', 'oreo cake', 'New', 'enakkkk masih baru', 'Jakarta', 'SALE', NULL),
-(41, 'uploads/5fbe1e839097f.jpeg', '20000', 'Dompet', 'Second', 'kondisi masih 90%, bahan bagus', 'Jakarta Timur', 'SALE', NULL);
+INSERT INTO `selling_posts` (`id`, `path`, `product_price`, `product_name`, `product_condition`, `product_desc`, `seller_loc`, `selling_status`, `whatsapp`, `user_id`, `campaign_id`) VALUES
+(3, 'uploads/5f9e859b26b00.jpeg', '30000', 'Tanaman Hijau', 'New', 'Tanaman dalam kondisi bagus. Panjang daun 60cm. \r\n\r\nBisa COD daerah Rawamangun dan sekitarnya.', 'Bekasi', 'SALE', '6287883520021', 2, 1),
+(5, 'uploads/5f9e8ac95197e.jpg', '20000', 'Mouse Gaming Logitech G PRO', 'Second', 'Logitech G PRO dengan box. \r\n\r\nPemakaian dari Januari 2020.\r\n\r\nSebelah kanan karet sudah terkikis. \r\n\r\nNo double klik. \r\nSemua sensor aman. \r\nSoftware logitech aman.', 'bekasi', 'SALE', '6282117250190', 1, 1),
+(7, 'uploads/5f9e9e0e3c5bc.jpg', '50000', 'Buah', 'New', 'Buah', 'Bekasi', 'SALE', '6282117250190', 1, 1),
+(31, 'uploads/5fa11d35a429b.jpg', '110000', 'Helm ', 'New', 'Kondisi baru, size L', 'Jl. Raya Bintara 6 Bekasi barat', 'SALE', '6282117250190', 1, 1),
+(33, 'uploads/5fa17b064394b.jpeg', '70000', 'Pampers MamyPoko', 'New', 'Masih baru', 'Bekasi', 'SALE', '6282117250190', 1, 1),
+(34, 'uploads/5fa2312c50c98.jpeg', '15000', 'Garnier Micellar Water', 'Second', 'isi produk masih banyak, kondisi sekitar 80%', 'Kecamatan Mustika Jaya, Bekasi, Jawa Barat', 'SOLD', '6287883520021', 1, 1),
+(36, 'uploads/5fae12b1e1a9f.jpeg', '30000', 'Bebek', 'New', 'kondisi bebek sehat 100%', 'Bekasi', 'SALE', '6282117250190', 1, 1),
+(37, 'uploads/5fae9031510a2.jpeg', '20000', 'Dompet', 'Second', 'kondisi dompet masih 80%', 'Bekasi', 'SOLD', '6282117250190', 1, 1),
+(44, 'uploads/5fbe7de266f79.png', '35000', 'spotify premium', 'New', 'memberikan skip tak terbatas dan melampauinya', 'bintara', 'SALE', '6287883520021', 1, 1),
+(45, 'uploads/5fc35e15542c2.jpeg', '40000', 'Cardigan Hitam', 'Used', 'Kualitas masih 90%, bahan adem', 'Bekasi Timur', 'SALE', '6282117250190', 1, 4),
+(46, 'uploads/5fc8f3404d311.jpg', '20000', 'Vitamin C', 'New', 'bagus utk daya tahan tubuh', 'bintara', 'SALE', '6287886954900', 14, 9),
+(47, 'uploads/5fc8f722dc31c.jpg', '35000', 'toner hada labo', 'Used', 'kondisi 95% baru dipake 10 tetes', 'bintara', 'SALE', '6287886954900', 14, 14),
+(48, 'uploads/5fc9e0a41af41.jpg', '10000', 'Pare Segar', 'New', 'Baru panen dari ladang', 'Bogor', 'SALE', '6285777885465', 16, 15),
+(49, 'uploads/5fc9e0ebc96ab.jpg', '30000', 'chocodot (chocolate dodol garut)', 'New', 'peduli anak yatim', 'cakung', 'SALE', '6285694760270', 17, 17);
 
 -- --------------------------------------------------------
 
@@ -117,30 +160,21 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `fullname`, `username`, `password`, `user_profpic`) VALUES
-(9, 'mauraa@gmail.com', 'mora', 'mora123', '$2y$10$oU1/D/3NH/HlKaA1jMAyBOREQVh0IYAiXQPTIWDa/S0gcTZdboSPq', ''),
-(123, 'mauraqoonitah@gmail.com', 'mora', 'mauraqoonitah', '$2y$10$3S2W2HKrWaTOQQ6JNv2SSOc7aQXtIp6dILMHdynl2u8fhJQrZvF6y', 'profpic'),
-(124, 'coba@gmail.com', 'cobain', 'cobain', '$2y$10$ZOnXmtBTCyPiouNE3ivr5ONyHfShVkUUSWrpqKoAOapTM4ARwRlh.', ''),
-(125, 'maaauraqoonitah@gmail.com', 'maura qipi', 'mauraptr', '$2y$10$W9H5djaWFVJQRjmQj3HkGuVesvD4ikwHTvdAp0Uc1uPFFJqhmSCOO', ''),
-(126, 'mauaaaraqoonitah15@gmail.com', 'test', 'testtttt', '$2y$10$AAQ.RXiZsBXGK1PUleSvj.X/mdX/M8xv8x80CeIBM1GgynuF5Xo5a', ''),
-(127, 'tesssst@gmail.com', 'lagi test', 'lagitest', '$2y$10$1xsKJFBhwDFfzfxBVTGYlO5jywofq45yBh/IRjkTLClx6cvP8Ilca', ''),
-(128, 'mauraqaaoonitah@gmail.com', 'maoaokaka', 'maura123', '$2y$10$7RnZlTEkK3AGu.OBrHjS4O3h.8vuxsc98U0M8BuAGFl7UKdGbmOG2', ''),
-(129, 'octarinasalsabila@gmail.com', 'Octarina Salsa', 'octarina00', '$2y$10$9z3ONmVVHluAaj4xynwG..b4MM02urEud/nzPejbukIhtbV9pw54e', ''),
-(130, 'mauraqooniaatah@gmail.com', 'nsksskso', 'testt123', '$2y$10$UuSulMFDBQjhkZaCYEvU/ufeOIvDhjcxGUsRJubuSeyouK7x4FnC.', ''),
-(137, 'aakkadmmauraqoonitah@gmail.com', 'mora', 'llmauraqada', '$2y$10$u2A15YoEzeLpQ1ZYYRr6ouqAzYmPmFs9RKg8wim4YTndxGcX5JQJa', ''),
-(132, 'taest@gmail.com', 'akakkala', 'akalalala', '$2y$10$IDSPqoyGUqDRb0ac3eC1J.1umkPme50aZZPwgI.g34WFcWkRln346', ''),
-(133, 'ammauraqoonitah@gmail.com', 'mora', 'mauraq', '$2y$10$KFejgLEtUdGR2AE9G5IVxOeM6.tCl1z2Aala/L/BqIDRnSGzjg4mW', ''),
-(134, 'aammauraqoonitah@gmail.com', 'mora', 'mauraqa', '$2y$10$YuU/Pd6/awOGXxY8.iSBc.fOrXSNCqpcfajg6icPEC9JJuioWaeGa', 'https://jakartaqurban.com/'),
-(135, 'aadmmauraqoonitah@gmail.com', 'mora', 'mauraqad', '$2y$10$HxlqT.95aOgTEuOfvVBg5eAY91CpRYsxA3NbzrQXQBWsLpv7RdKa6', 'https://jakartaqurban.com/https://jakartaqurban.com/'),
-(136, 'aaadmmauraqoonitah@gmail.com', 'mora', 'mauraqada', '$2y$10$UE5dhM3UnSE4E4CjettJRO9R69V.5LBX0qloX.lWtfuvEQozodBp6', 'https://jakartaqurban.com/https://jakartaqurban.com/https://jakartaqurban.com/'),
-(138, 'aaakkadmmauraqoonitah@gmail.com', 'mora', 'llamauraqada', '$2y$10$Hpdgz3.jlo2dVgOIRyNy5uOW.BWzFcfeoMOmAdBDccpUEfnQYg3BS', ''),
-(139, 'aaaskkadmmauraqoonitah@gmail.com', 'mora', 'llasmauraqadaa', '$2y$10$jRabjQbeM09.n7pC4CzZwOvDeITgrZidYU222HYNbOdG8voi82sCC', 'kokokok'),
-(140, 'aaaskkaddmmauraqoonitah@gmail.com', 'mora', 'ddddddddddddddddddddd', '$2y$10$/ByEC1ZZDcSuVkVHakftvejLbJ6WQZS.zssJ.Rr9RdiqX1BBmMob6', ''),
-(141, 'majdjddjuraqoonitah15@gmail.com', 'jzjzjsksiaia', 'cobaaaa', '$2y$10$0yPX0jTb..c3HFzmkYYKGuCyLVfyYXSBLgL.9FGg6oN5ew.Zst2Au', ''),
-(142, 'mwhwhauraqoonitah15@gmail.com', 'jajaajajajn', 'apanyaa', '$2y$10$RNbRjnK3B9S5i.Jwr/Qv2e0z8a73SlkPSBQB70yqGoYZtlClxdw.K', ''),
-(143, 'aaaaaaaaaaaaaaaaaaa@gmail.com', 'mora', 'ddaaaaa', '$2y$10$S10vJZNH0clxc/lAFEl3guOXXRwZKfSFY1alrwH.kaqe6Jp25Onm2', ''),
-(144, 'octarina@gmail.com', 'octarina', 'octarsalsa', '$2y$10$YPIrYe.AF3GQZVE5ixuY.ePR.S5bdDE3XA8j0jkINw0be4FcOYwrO', 'upload/profpic_default.png'),
-(145, 'privatiahaan19unj@gmail.com', 'cobaaaa', 'bisadong', '$2y$10$.24VfWvX5bQZoNIgv/vBXuHwRVlBMGtLJkW8Bz089KLfmopzEP01W', 'profpic/profpic_default.png'),
-(146, 'testtt@gmail.com', 'testnih', 'bisakek', '$2y$10$ifp6Z5ew027E2k8Sh9jf..1L/rFeWVHaA7QA7ziL9jGU0BG0A7wu6', 'profpic/profpic_default');
+(1, 'octarinasalsabila@gmail.com', 'Octarina Salsabila', 'octarinasls', '$2y$10$ERBi4/SZB/wHrok48acaDuV2By/gvtES5Y3tCU5SopgDYEgMVH23W', 'uploads/5fd1ed4dc145c.jpeg'),
+(2, 'mauraqoonitah@gmail.com', 'Maura Qoonitah', 'mauraputri', '$2y$10$imYzemY8uVX9Gw1u9JXmRe.4IdqjRLyiSEKDGI5qCblz5L4KpWAz.', 'uploads/5fd24e801595c.jpg'),
+(3, 'atikahap.yes@gmail.com', 'Atikah Aulia', 'atikahlogic', '$2y$10$CLSJ1PiNlBbBTOkF.usp8.ABogcBFrUovdagQBtAwukVphbw0coLe', 'profpic/profpic_default.png'),
+(0, 'salsa9929@gmail.com', 'Salsa Rahmadati', 'salsarahmadati', '$2y$10$erjU.m/2y2WxBi6Vk7OiLueUZOnAw472aQ1BuIlhQP0FsA66CbzR6', 'profpic/profpic_default.png'),
+(6, 'rinaa7756@gmail.com', 'rina agustina', 'rinaagst', '$2y$10$uZ2oLtrKIYqo4zzLsnTk/O.YZpN.EyPGiHcnC5NYdsczLxxKkTfGO', 'profpic/profpic_default.png'),
+(7, 'mohamadadli030@gmail.com', 'Mohamad Adli ', 'mohamadadli', '$2y$10$JFLoUN5kfyHDL0tTD1cTsezd4Y2AkgTS1916bOVnzvKY3Daxq/IFy', 'profpic/profpic_default.png'),
+(19, 'adinigufroni06@gmail.com', 'adini g', 'adinigf', '$2y$10$x89OdHyrsh2sSJ93hDdzo.Db2fnh0qi6t1kuSGslnwYpYGOEGspQS', 'profpic/profpic_default.png'),
+(9, 'ardianperdanaputra@gmail.com', 'Ardian Perdana Putra', 'ardee123', '$2y$10$9kn/wUVl877pnxoYEHD22eckigYj3KwcjS7fPnDtlZsq7XPKxc1tK', 'profpic/profpic_default.png'),
+(18, 'legendhanzo@gmail.com', 'muhammad hafidh oktanevaldi', 'legendhanzo', '$2y$10$FVuT43xCuGCzKWyyPz5L/eb9Co.ZLjbXWzfMC3ZcV850uS8gmEpjW', 'profpic/profpic_default.png'),
+(17, 'novitanovnov321@gmail.com', 'Novitasari', 'novita11', '$2y$10$by.eoBJ/q2hPTmNe5xVVXOOsnJBj9XBUPvGpVGd3XiVEcVmVffaMe', 'profpic/profpic_default.png'),
+(16, 'farahtest@gmail.com', 'farah', 'farah12', '$2y$10$jpjT1/HRl0mOtBfrVeMXAemeKNrF.hA5XwuRTf.FZ8syOBQNU9Vvi', 'profpic/profpic_default.png'),
+(13, 'privatin19unj@gmail.com', 'privatin', 'privatin', '$2y$10$tc6hqKy31R458EfqttqsnO2oKE9snpX2VeHsTN88t/kXZgywL7012', 'profpic/profpic_default.png'),
+(14, 'nurzaakiahulfah@gmail.com', 'Ulfah Nurzaakiah', 'ulfahnr', '$2y$10$VaPEfHDmlTTBMhtIHb1VDuiMxCFhURjs0RshuQfr53lzeHfQ1S2Ka', 'profpic/profpic_default.png'),
+(15, 'ronggopiero08@gmail.com', 'ronggo piero putra', 'gooogoo', '$2y$10$0pW7LcQ5ZUBMf9bIdmxPUe893IgDyTXAbnZITwLxLfpqEUb6Lg8gm', 'profpic/profpic_default.png'),
+(20, 'aji.tutorial86@gmail.com', 'Aji Tutorial', 'AjiTutorial', '$2y$10$KdlpiOtp5WK8hzJ3hdN7jO1a7delNRXKxgpRNh/ZzulhK.txvAmKC', 'profpic/profpic_default.png');
 
 -- --------------------------------------------------------
 
@@ -161,27 +195,32 @@ CREATE TABLE `VIEW_CAMPAIGNLIST` (
 ,`username` varchar(128)
 ,`fullname` varchar(128)
 ,`email` varchar(128)
+,`user_profpic` varchar(256)
 );
 
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `VIEW_SELLINGPRODUCT`
+-- Stand-in structure for view `VIEW_SELLINGPOSTS`
 -- (See below for the actual view)
 --
-CREATE TABLE `VIEW_SELLINGPRODUCT` (
-`id_product` int(11)
-,`path_product` varchar(256)
+CREATE TABLE `VIEW_SELLINGPOSTS` (
+`id` int(11)
+,`path` varchar(256)
 ,`product_price` varchar(128)
 ,`product_name` varchar(256)
 ,`product_condition` varchar(10)
 ,`product_desc` varchar(512)
 ,`seller_loc` varchar(256)
 ,`selling_status` varchar(10)
+,`whatsapp` varchar(15)
 ,`user_id` int(11)
-,`username` varchar(128)
-,`fullname` varchar(128)
 ,`email` varchar(128)
+,`fullname` varchar(128)
+,`username` varchar(128)
+,`user_profpic` varchar(256)
+,`campaign_id` int(11)
+,`campaign_title` varchar(256)
 );
 
 -- --------------------------------------------------------
@@ -191,16 +230,16 @@ CREATE TABLE `VIEW_SELLINGPRODUCT` (
 --
 DROP TABLE IF EXISTS `VIEW_CAMPAIGNLIST`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`jakart44`@`localhost` SQL SECURITY DEFINER VIEW `VIEW_CAMPAIGNLIST`  AS  select `cl`.`id` AS `id`,`cl`.`path` AS `path`,`cl`.`campaign_category` AS `campaign_category`,`cl`.`campaign_title` AS `campaign_title`,`cl`.`campaign_desc` AS `campaign_desc`,`cl`.`campaign_receiver` AS `campaign_receiver`,`cl`.`usage_details` AS `usage_details`,`cl`.`phone_campaign` AS `phone_campaign`,`cl`.`user_id` AS `user_id`,`u`.`username` AS `username`,`u`.`fullname` AS `fullname`,`u`.`email` AS `email` from (`campaign_list` `cl` left join `user` `u` on(`cl`.`user_id` = `u`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`jakart44`@`localhost` SQL SECURITY DEFINER VIEW `VIEW_CAMPAIGNLIST`  AS  select `cl`.`id` AS `id`,`cl`.`path` AS `path`,`cl`.`campaign_category` AS `campaign_category`,`cl`.`campaign_title` AS `campaign_title`,`cl`.`campaign_desc` AS `campaign_desc`,`cl`.`campaign_receiver` AS `campaign_receiver`,`cl`.`usage_details` AS `usage_details`,`cl`.`phone_campaign` AS `phone_campaign`,`cl`.`user_id` AS `user_id`,`u`.`username` AS `username`,`u`.`fullname` AS `fullname`,`u`.`email` AS `email`,`u`.`user_profpic` AS `user_profpic` from (`campaign_list` `cl` left join `user` `u` on(`cl`.`user_id` = `u`.`id`)) ;
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `VIEW_SELLINGPRODUCT`
+-- Structure for view `VIEW_SELLINGPOSTS`
 --
-DROP TABLE IF EXISTS `VIEW_SELLINGPRODUCT`;
+DROP TABLE IF EXISTS `VIEW_SELLINGPOSTS`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`jakart44`@`localhost` SQL SECURITY DEFINER VIEW `VIEW_SELLINGPRODUCT`  AS  select `sp`.`id` AS `id_product`,`sp`.`path` AS `path_product`,`sp`.`product_price` AS `product_price`,`sp`.`product_name` AS `product_name`,`sp`.`product_condition` AS `product_condition`,`sp`.`product_desc` AS `product_desc`,`sp`.`seller_loc` AS `seller_loc`,`sp`.`selling_status` AS `selling_status`,`sp`.`user_id` AS `user_id`,`u`.`username` AS `username`,`u`.`fullname` AS `fullname`,`u`.`email` AS `email` from (`selling_posts` `sp` left join `user` `u` on(`sp`.`user_id` = `u`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`jakart44`@`localhost` SQL SECURITY DEFINER VIEW `VIEW_SELLINGPOSTS`  AS  select `sp`.`id` AS `id`,`sp`.`path` AS `path`,`sp`.`product_price` AS `product_price`,`sp`.`product_name` AS `product_name`,`sp`.`product_condition` AS `product_condition`,`sp`.`product_desc` AS `product_desc`,`sp`.`seller_loc` AS `seller_loc`,`sp`.`selling_status` AS `selling_status`,`sp`.`whatsapp` AS `whatsapp`,`sp`.`user_id` AS `user_id`,`u`.`email` AS `email`,`u`.`fullname` AS `fullname`,`u`.`username` AS `username`,`u`.`user_profpic` AS `user_profpic`,`sp`.`campaign_id` AS `campaign_id`,`cl`.`campaign_title` AS `campaign_title` from ((`selling_posts` `sp` left join `user` `u` on(`sp`.`user_id` = `u`.`id`)) left join `campaign_list` `cl` on(`sp`.`campaign_id` = `cl`.`id`)) ;
 
 --
 -- Indexes for dumped tables
@@ -214,11 +253,19 @@ ALTER TABLE `campaign_list`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Indexes for table `logging`
+--
+ALTER TABLE `logging`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `selling_posts`
 --
 ALTER TABLE `selling_posts`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `campaign_id` (`campaign_id`);
 
 --
 -- Indexes for table `user`
@@ -234,19 +281,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `campaign_list`
 --
 ALTER TABLE `campaign_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `logging`
+--
+ALTER TABLE `logging`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `selling_posts`
 --
 ALTER TABLE `selling_posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
