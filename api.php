@@ -215,21 +215,6 @@ if (isset($_GET['apicall'])) {
                 array_push($response, $image);
             }
 
-            //$image = array();
-            //$image['id'] = $id;
-            //$image['path'] = getBaseURL() . $path;
-            //$image['product_price'] = $product_price;
-            //$image['product_name'] = $product_name;
-            //$image['product_condition'] = $product_condition;
-            //$image['product_desc'] = $product_desc;
-            //$image['seller_loc'] = $seller_loc;
-            //['selling_status'] = $selling_status;
-            //$image['user_id'] = $user_id;
-            //$image['username'] = $username;
-            //$image['fullname'] = $fullname;
-            //$image['email'] = $email;
-
-
             break;
 
         case 'campaigns':
@@ -259,19 +244,6 @@ if (isset($_GET['apicall'])) {
                 $image['user_profpic'] = getBaseURL() . $row["user_profpic"];
                 array_push($response, $image);
             }
-
-
-            //while ($stmt->fetch()) {
-            //$image = array();
-            //$image['id'] = $id;
-            //$image['path'] = getBaseURL() . $path;
-            //$image['campaign_category'] = $campaign_category;
-            //$image['campaign_title'] = $campaign_title;
-            //$image['campaign_desc'] = $campaign_desc;
-            //$image['donation_goes'] = $donation_goes;
-            //$image['usage_details'] = $usage_details;
-            //['phone_number'] = $phone_number;
-
             break;
 
 
@@ -409,6 +381,144 @@ if (isset($_GET['apicall'])) {
             }
             break;
             
+            case 'campaignpost_profile':
+            //error message and error flag
+
+            $user_id = $_POST['user_id'];
+
+            //validating the request to check if all the required parameters are available or not 
+            if (!isset($_POST['user_id'])) {
+                $message .= "user_id, ";
+                $is_error = true;
+            }
+            //in case we have an error in validation, displaying the error message 
+            if ($is_error) {
+                $response['error'] = true;
+                $response['message'] = $message . " required.";
+            } else {
+                //if validation succeeds 
+                $stmt = "SELECT * FROM VIEW_CAMPAIGNLIST WHERE user_id = $user_id ORDER BY id DESC";
+                $read = mysqli_query($conn, $stmt);
+                //$row = mysqli_fetch_array($read);
+
+                while ($row = mysqli_fetch_array($read)) {
+
+                    $image = array();
+                    $image['id'] = $row["id"];
+                    $image['path'] = getBaseURL() . $row["path"];
+                    $image['campaign_category'] = $row["campaign_category"];
+                    $image['campaign_title'] = $row["campaign_title"];
+                    $image['campaign_desc'] = $row["campaign_desc"];
+                    $image['campaign_receiver'] = $row["campaign_receiver"];
+                    $image['usage_details'] = $row["usage_details"];
+                    $image['phone_campaign'] = $row["phone_campaign"];
+                    $image['user_id'] = $row["user_id"];
+                    $image['username'] = $row["username"];
+                    $image['fullname'] = $row["fullname"];
+                    $image['email'] = $row["email"];
+                    $image['user_profpic'] = getBaseURL() . $row["user_profpic"];
+                    array_push($response, $image);
+                }
+            }
+            break;
+
+            case 'delete_sellingpost':
+                $message = 'Params ';
+                $is_error = false;
+
+                $id = $_POST['id'];
+
+                if (!isset($_POST['id'])) {
+                    $message .= "id, ";
+                    $is_error = true;
+                }
+                if ($is_error) {
+                    $response['error'] = true;
+                    $response['message'] = $message . " required.";
+                }
+
+                else {
+
+                    $stmt = "DELETE FROM selling_posts WHERE id = $id";
+                    $read = mysqli_query($conn, $stmt);
+
+                    if ($row = mysqli_fetch_array($read)) {
+                        $response['error'] = false;
+                        $response['message'] = "berhasil hapus product";
+                           
+                    }
+            }
+             
+                break;
+
+
+                case 'delete_campaignpost':
+                    $message = 'Params ';
+                    $is_error = false;
+    
+                    $id = $_POST['id'];
+    
+                    if (!isset($_POST['id'])) {
+                        $message .= "id, ";
+                        $is_error = true;
+                    }
+                    if ($is_error) {
+                        $response['error'] = true;
+                        $response['message'] = $message . " required.";
+                    }
+    
+                    else {
+    
+                        $stmt = "DELETE FROM campaign_list WHERE id = $id";
+                        $read = mysqli_query($conn, $stmt);
+    
+                        if ($row = mysqli_fetch_array($read)) {
+                            $response['error'] = false;
+                            $response['message'] = "berhasil hapus campaign";
+                               
+                        }
+                }
+                 
+                    break;
+            
+            case 'editproduct':
+            //error message and error flag
+
+            $id = $_POST['id'];
+            $product_price = $_POST['product_price'];
+            $product_name = $_POST['product_name'];
+            $product_desc = $_POST['product_desc'];
+            $seller_loc = $_POST['seller_loc'];
+            $whatsapp = $_POST['whatsapp'];
+            
+
+            //validating the request to check if all the required parameters are available or not 
+            if (!isset($_POST['id'])) {
+                $message .= "id, ";
+                $is_error = true;
+            }
+
+            //in case we have an error in validation, displaying the error message 
+            if ($is_error) {
+                $response['error'] = true;
+                $response['message'] = $message . " required.";
+            } else {
+                $stmt = "UPDATE selling_posts SET product_price = COALESCE('$product_price', product_price), product_name = COALESCE('$product_name', product_name), product_desc = COALESCE('$product_desc', product_desc), seller_loc = COALESCE('$seller_loc', seller_loc), whatsapp = COALESCE('$whatsapp', whatsapp) WHERE id=$id";
+                mysqli_query($conn, $stmt);
+                $profpic = "SELECT * FROM user WHERE id=$id";
+                $read_user = mysqli_query($conn, $profpic);
+                $row = mysqli_fetch_array($read_user);
+                $response['message'] = 'Selling Post Updated!';
+                $response['id'] = $row['id'];
+                $response['product_name'] = $row['product_name'];
+                $response['product_price'] = $row['product_price'];
+                $response['product_desc'] = $row['product_desc'];
+                $response['seller_loc'] = $row['seller_loc'];
+                $response['whatsapp'] = $row['whatsapp'];
+                
+            }
+            break;
+            
             
             case 'edituser':
             //error message and error flag
@@ -461,8 +571,6 @@ if (isset($_GET['apicall'])) {
                     
                     }
                 }
-
-                
             }
             break;
             
@@ -505,7 +613,6 @@ if (isset($_GET['apicall'])) {
 
             $stmt = "SELECT * FROM logging ORDER BY id DESC";
             $read = mysqli_query($conn, $stmt);
-
 
             while ($row = mysqli_fetch_array($read)) {
                 $show = array();
@@ -631,11 +738,55 @@ if (isset($_GET['apicall'])) {
 
             break;
 
+            case 'searchSellingProducts':
+        
+                    $product_name = $_POST['product_name'];
+                    // $product_desc = $_POST['product_desc'];
+        
+                    if (!isset($_POST['product_name'])) {
+                        $message .= "product_name, ";
+                        $is_error = true;
+                    }
+                    if ($is_error) {
+                        $response['error'] = true;
+                        $response['message'] = $message . " required.";
+                    } else {
+                        $stmt = "SELECT * FROM VIEW_SELLINGPOSTS WHERE product_name or product_desc LIKE '%$product_name%'";
+                        $read = mysqli_query($conn, $stmt);
+
+                        while ($row = mysqli_fetch_array($read)) {
+        
+                            $image = array();
+                            $image['id'] = $row["id"];
+                            $image['path'] = getBaseURL() . $row["path"];
+                            $image['product_price'] = $row["product_price"];
+                            $image['product_name'] = $row["product_name"];
+                            $image['product_condition'] = $row["product_condition"];
+                            $image['product_desc'] = $row["product_desc"];
+                            $image['seller_loc'] = $row["seller_loc"];
+                            $image['selling_status'] = $row["selling_status"];
+                            $image['whatsapp'] = $row["whatsapp"];
+                            $image['user_id'] = $row["user_id"];
+                            $image['email'] = $row["email"];
+                            $image['fullname'] = $row["fullname"];
+                            $image['username'] = $row["username"];
+                            $image['user_profpict'] = getBaseURL() . $row["user_profpic"];
+                            $image['campaign_id'] = $row["campaign_id"];
+                            $image['campaign_title'] = $row["campaign_title"];
+        
+        
+                            array_push($response, $image);
+                        }
+                    }
+                    break;
+            
+            
         default:
             $response['error'] = true;
             $response['message'] = 'Invalid Operation Called';
             break;
-    }
+    }  
+
 } else {
     $response['error'] = true;
     $response['message'] = 'Invalid API Call';
