@@ -63,7 +63,6 @@ if (isset($_GET['apicall'])) {
                 $is_error = true;
             }
 
-
             //in case we have an error in validation, displaying the error message 
             if ($is_error) {
                 $response['error'] = true;
@@ -81,7 +80,7 @@ if (isset($_GET['apicall'])) {
 
                     if ($stmt->execute()) {
                         $response['error'] = false;
-                        $response['message'] = 'Product Uploaded Successfully';
+                        $response['message'] = 'Mohon tunggu, sedang deteksi objek...';
                         $response['image'] = getBaseURL() . $target_file;
                         $response['product_price'] = $_POST['product_price'];
                         $response['product_name'] = $_POST['product_name'];
@@ -92,6 +91,7 @@ if (isset($_GET['apicall'])) {
                         $response['whatsapp'] = $_POST['whatsapp'];
                         $response['user_id'] = $_POST['user_id'];
                         $response['campaign_id'] = $_POST['campaign_id'];
+                        $response['id'] = $stmt->insert_id;
                     } else {
                         $response['error'] = true;
                         $response['message'] = 'Could not upload image, try again...';
@@ -100,6 +100,39 @@ if (isset($_GET['apicall'])) {
                     $response['error'] = true;
                     $response['message'] = 'Try again later...';
                 }
+            }
+            break;
+            
+        case 'uploadDetectionResult':
+            //error message and error flag
+
+            $id = $_POST['id'];
+            $product_category = trim($_POST['product_category'],'"');
+
+            //validating the request to check if all the required parameters are available or not 
+            if (!isset($_POST['id'])) {
+                $message .= "id, ";
+                $is_error = true;
+            }
+
+            //in case we have an error in validation, displaying the error message 
+            if ($is_error) {
+                $response['error'] = true;
+                $response['message'] = $message . " required.";
+            } else {
+                $stmt = "UPDATE selling_posts SET product_category = COALESCE('$product_category', product_category) WHERE id=$id";
+                mysqli_query($conn, $stmt);
+                $profpic = "SELECT * FROM user WHERE id=$id";
+                $read_user = mysqli_query($conn, $profpic);
+                $row = mysqli_fetch_array($read_user);
+                $response['message'] = 'Selling Post Updated!';
+                $response['id'] = $row['id'];
+                $response['product_name'] = $row['product_name'];
+                $response['product_price'] = $row['product_price'];
+                $response['product_desc'] = $row['product_desc'];
+                $response['seller_loc'] = $row['seller_loc'];
+                $response['whatsapp'] = $row['whatsapp'];
+                
             }
             break;
 
@@ -163,7 +196,7 @@ if (isset($_GET['apicall'])) {
 
                     if ($stmt->execute()) {
                         $response['error'] = false;
-                        $response['message'] = 'Campaign Uploaded Successfully';
+                        $response['message'] = 'Berhasil Upload! Lihat di Halaman Campaign.';
                         $response['image'] = getBaseURL() . $target_file;
                         $response['campaign_category'] = $_POST['campaign_category'];
                         $response['campaign_title'] = $_POST['campaign_title'];
@@ -210,6 +243,7 @@ if (isset($_GET['apicall'])) {
                 $image['user_profpict'] = getBaseURL() . $row["user_profpic"];
                 $image['campaign_id'] = $row["campaign_id"];
                 $image['campaign_title'] = $row["campaign_title"];
+                $image['product_category'] = $row["product_category"];
 
 
                 array_push($response, $image);
@@ -577,7 +611,7 @@ if (isset($_GET['apicall'])) {
             case 'useractivities':
             //error message and error flag
             $user_id = $_POST['user_id'];
-            $username = trim($_POST['username'],'"');;
+            $username = trim($_POST['username'],'"');
             $activity = $_POST['activity'];
             $datetime = date('Y-m-d H:i:s');
 
@@ -751,7 +785,49 @@ if (isset($_GET['apicall'])) {
                         $response['error'] = true;
                         $response['message'] = $message . " required.";
                     } else {
-                        $stmt = "SELECT * FROM VIEW_SELLINGPOSTS WHERE product_name or product_desc LIKE '%$product_name%'";
+                        $stmt = "SELECT * FROM VIEW_SELLINGPOSTS WHERE product_name LIKE '%$product_name%' or product_desc LIKE '%$product_name%'";
+                        $read = mysqli_query($conn, $stmt);
+
+                        while ($row = mysqli_fetch_array($read)) {
+        
+                            $image = array();
+                            $image['id'] = $row["id"];
+                            $image['path'] = getBaseURL() . $row["path"];
+                            $image['product_price'] = $row["product_price"];
+                            $image['product_name'] = $row["product_name"];
+                            $image['product_condition'] = $row["product_condition"];
+                            $image['product_desc'] = $row["product_desc"];
+                            $image['seller_loc'] = $row["seller_loc"];
+                            $image['selling_status'] = $row["selling_status"];
+                            $image['whatsapp'] = $row["whatsapp"];
+                            $image['user_id'] = $row["user_id"];
+                            $image['email'] = $row["email"];
+                            $image['fullname'] = $row["fullname"];
+                            $image['username'] = $row["username"];
+                            $image['user_profpict'] = getBaseURL() . $row["user_profpic"];
+                            $image['campaign_id'] = $row["campaign_id"];
+                            $image['campaign_title'] = $row["campaign_title"];
+        
+        
+                            array_push($response, $image);
+                        }
+                    }
+                    break;
+                    
+            case 'categorySellingProducts':
+        
+                    $product_category = $_POST['product_category'];
+                    // $product_desc = $_POST['product_desc'];
+        
+                    if (!isset($_POST['product_category'])) {
+                        $message .= "product_category, ";
+                        $is_error = true;
+                    }
+                    if ($is_error) {
+                        $response['error'] = true;
+                        $response['message'] = $message . " required.";
+                    } else {
+                        $stmt = "SELECT * FROM VIEW_SELLINGPOSTS WHERE product_category = $product_category ORDER BY id DESC";
                         $read = mysqli_query($conn, $stmt);
 
                         while ($row = mysqli_fetch_array($read)) {
